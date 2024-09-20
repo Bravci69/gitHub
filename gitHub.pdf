@@ -1,0 +1,27 @@
+<?php
+// Include the autoload from Composer
+require 'vendor/autoload.php';
+
+use Dompdf\Dompdf;
+
+// Initialize the Dompdf class
+$dompdf = new Dompdf();
+
+// Load HTML content
+$html = '
+    <h1>Hello, World!</h1>
+    <p>This PDF is generated from HTML using DOMPDF.</p>
+';
+
+// Set the HTML content
+$dompdf->loadHtml($html);
+
+// (Optional) Set paper size and orientation
+$dompdf->setPaper('A4', 'portrait');
+
+// Render the HTML as PDF
+$dompdf->render();
+
+// Output the generated PDF (1st parameter is the file name, 2nd is output mode)
+$dompdf->stream('generated_pdf.pdf', ['Attachment' => 0]); // 0 = display in browser, 1 = force download
+?>
